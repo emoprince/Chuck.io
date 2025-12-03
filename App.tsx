@@ -89,6 +89,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [isDisclaimerOpen, setIsDisclaimerOpen] = useState(false);
   const [isWhitepaperOpen, setIsWhitepaperOpen] = useState(false);
+  const previousPathRef = useRef<string>(window.location.pathname === '/whitepaper' ? '/' : window.location.pathname);
   const godMode = useKonamiCode();
 
   // Scroll Animations Hooks for specific sections
@@ -103,17 +104,36 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Auto-open whitepaper when arriving with ?whitepaper=1
+  // Auto-open whitepaper when arriving with ?whitepaper=1 or /whitepaper path
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    if (params.get('whitepaper') === '1') {
+    const isWhitepaperPath = window.location.pathname.toLowerCase().endsWith('/whitepaper');
+
+    if (params.get('whitepaper') === '1' || isWhitepaperPath) {
       setIsWhitepaperOpen(true);
+      if (isWhitepaperPath) {
+        previousPathRef.current = '/';
+      }
       params.delete('whitepaper');
       const newSearch = params.toString();
-      const newUrl = window.location.pathname + (newSearch ? `?${newSearch}` : '') + window.location.hash;
+      const basePath = isWhitepaperPath ? previousPathRef.current : window.location.pathname;
+      const newUrl = basePath + (newSearch ? `?${newSearch}` : '') + window.location.hash;
       window.history.replaceState({}, '', newUrl);
     }
   }, []);
+
+  // Keep URL in sync when whitepaper modal opens/closes
+  useEffect(() => {
+    const whitepaperPath = '/whitepaper';
+    if (isWhitepaperOpen) {
+      if (window.location.pathname !== whitepaperPath) {
+        previousPathRef.current = window.location.pathname || '/';
+        window.history.pushState({}, '', whitepaperPath);
+      }
+    } else if (window.location.pathname === whitepaperPath) {
+      window.history.pushState({}, '', previousPathRef.current || '/');
+    }
+  }, [isWhitepaperOpen]);
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -490,9 +510,13 @@ function App() {
                          <div className="w-full md:w-1/3 flex flex-col items-center text-center">
                               {/* SMOOTHER HEART ANIMATION */}
                           <div className="relative mb-6 animate-pulse-smooth">
-                             <Heart size={100} fill="#FF4500" className="text-chuck-burn drop-shadow-[0_0_25px_rgba(255,69,0,0.6)]" />
+                             <Heart 
+                               size={90} 
+                               fill="#FF4500" 
+                               className="text-chuck-burn drop-shadow-[0_0_25px_rgba(255,69,0,0.6)] w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28" 
+                             />
                              <div className="absolute inset-0 flex items-center justify-center">
-                                <span className="font-arcade text-xl sm:text-2xl text-white leading-none">+1UP</span>
+                                <span className="font-arcade text-lg sm:text-xl md:text-2xl text-white leading-none tracking-tight">+1UP</span>
                              </div>
                           </div>
                             <h3 className="font-arcade text-xl text-white mb-2">DONATIONS</h3>
@@ -664,7 +688,7 @@ function App() {
 
                         <div className="mt-4 flex items-center justify-center p-4 border border-chuck-secondary/20 bg-black/40">
                             <div className="text-center w-full">
-                               <div className="font-arcade text-2xl sm:text-3xl text-white mb-2 leading-tight break-words">1,000,000,000</div>
+                               <div className="font-arcade text-xl sm:text-3xl text-white mb-2 leading-tight whitespace-nowrap">1,000,000,000</div>
                                <div className="font-mono text-chuck-secondary text-[10px] tracking-widest uppercase mb-4">MAX SUPPLY</div>
                                
                                <div className="flex justify-between text-xs font-mono text-chuck-secondary border-t border-chuck-secondary/20 pt-2">
@@ -716,18 +740,22 @@ function App() {
                     <div className="flex flex-col items-center z-10">
                       <div className="absolute inset-0 bg-chuck-burn/5 mix-blend-screen group-hover:bg-chuck-burn/10 transition-colors pointer-events-none"></div>
                       
-                      <Flame size={100} className="text-chuck-burn mb-4 md:mb-6 animate-pulse drop-shadow-[0_0_20px_rgba(255,69,0,0.8)]" fill="currentColor" />
+                      <Flame 
+                        size={96} 
+                        className="text-chuck-burn mb-4 md:mb-6 animate-pulse drop-shadow-[0_0_20px_rgba(255,69,0,0.8)] w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32" 
+                        fill="currentColor" 
+                      />
                       <h2 className="font-arcade text-3xl md:text-4xl text-white text-center leading-tight">THE INCINERATOR</h2>
                       
                       {/* Burn Tracker Inserted Here */}
-                      <div className="mt-8 scale-110">
+                      <div className="mt-6 md:mt-8">
                         <BurnTracker className="border-chuck-burn shadow-none" />
                       </div>
                     </div>
                  </div>
 
                  {/* Right Panel: Action */}
-                 <div className="w-full md:w-1/2 p-12 flex flex-col justify-center relative bg-chuck-primary/10">
+                 <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center relative bg-chuck-primary/10">
                     <div>
                       {/* Removed Zap Icon */}
 
