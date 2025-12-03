@@ -103,6 +103,18 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
+  // Auto-open whitepaper when arriving with ?whitepaper=1
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('whitepaper') === '1') {
+      setIsWhitepaperOpen(true);
+      params.delete('whitepaper');
+      const newSearch = params.toString();
+      const newUrl = window.location.pathname + (newSearch ? `?${newSearch}` : '') + window.location.hash;
+      window.history.replaceState({}, '', newUrl);
+    }
+  }, []);
+
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
     alert("Address copied to clipboard!");
@@ -477,12 +489,12 @@ function App() {
                       <div className="flex flex-col md:flex-row gap-12 items-center mt-6">
                          <div className="w-full md:w-1/3 flex flex-col items-center text-center">
                               {/* SMOOTHER HEART ANIMATION */}
-                              <div className="relative mb-6 animate-pulse-smooth">
-                                 <Heart size={100} fill="#FF4500" className="text-chuck-burn drop-shadow-[0_0_25px_rgba(255,69,0,0.6)]" />
-                                 <div className="absolute inset-0 flex items-center justify-center">
-                                    <span className="font-arcade text-2xl text-white">+1UP</span>
-                                 </div>
-                              </div>
+                          <div className="relative mb-6 animate-pulse-smooth">
+                             <Heart size={100} fill="#FF4500" className="text-chuck-burn drop-shadow-[0_0_25px_rgba(255,69,0,0.6)]" />
+                             <div className="absolute inset-0 flex items-center justify-center">
+                                <span className="font-arcade text-xl sm:text-2xl text-white leading-none">+1UP</span>
+                             </div>
+                          </div>
                             <h3 className="font-arcade text-xl text-white mb-2">DONATIONS</h3>
                             <p className="font-mono text-xs text-chuck-secondary">Chuck isn't just a mascot. He's a guardian. A portion of taxes and burns supports real dog shelters.</p>
                          </div>
@@ -700,12 +712,12 @@ function App() {
               <div className="flex flex-col md:flex-row items-stretch bg-chuck-primary/60 border border-chuck-burn/30 backdrop-blur-sm shadow-[0_0_30px_rgba(255,69,0,0.1)]">
                  
                  {/* Left Panel: Visuals */}
-                 <div className="w-full md:w-1/2 p-12 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-chuck-burn/30 relative overflow-hidden group">
+                 <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-chuck-burn/30 relative overflow-hidden group">
                     <div className="flex flex-col items-center z-10">
                       <div className="absolute inset-0 bg-chuck-burn/5 mix-blend-screen group-hover:bg-chuck-burn/10 transition-colors pointer-events-none"></div>
                       
-                      <Flame size={120} className="text-chuck-burn mb-6 animate-pulse drop-shadow-[0_0_20px_rgba(255,69,0,0.8)]" fill="currentColor" />
-                      <h2 className="font-arcade text-4xl text-white text-center">THE INCINERATOR</h2>
+                      <Flame size={100} className="text-chuck-burn mb-4 md:mb-6 animate-pulse drop-shadow-[0_0_20px_rgba(255,69,0,0.8)]" fill="currentColor" />
+                      <h2 className="font-arcade text-3xl md:text-4xl text-white text-center leading-tight">THE INCINERATOR</h2>
                       
                       {/* Burn Tracker Inserted Here */}
                       <div className="mt-8 scale-110">
