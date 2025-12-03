@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chuck on Base | The Roundhouse Crypto Canine</title>
+    <meta name="description" content="Meet Chuck, the roundhouse crypto canine on Base. Track burns, join the pack, unlock merch, and explore alliances in the Chuck on Base arcade experience." />
+    <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+    <meta name="theme-color" content="#02040a" />
+    <link rel="canonical" href="https://chuckonbase.io/" />
+    <link rel="icon" href="https://emoprince.github.io/Chuck95/LOGO_C-NEG-BLACK.svg" type="image/svg+xml">
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Chuck on Base" />
+    <meta property="og:title" content="Chuck on Base | The Roundhouse Crypto Canine" />
+    <meta property="og:description" content="Burn lotteries, community alliances, merch drops, and the official home of Chuck on Base." />
+    <meta property="og:url" content="https://chuckonbase.io/" />
+    <meta property="og:image" content="https://emoprince.github.io/Chuck95/LOGO_CHUCK-W.svg" />
+    <meta property="og:image:alt" content="Chuck on Base logo" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Chuck on Base | The Roundhouse Crypto Canine" />
+    <meta name="twitter:description" content="Join Chuck’s pack on Base. Track burns, explore alliances, and unlock the arcade experience." />
+    <meta name="twitter:image" content="https://emoprince.github.io/Chuck95/LOGO_CHUCK-W.svg" />
+    <meta name="twitter:site" content="@CHUCK_on_Base" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Chuck on Base",
+      "url": "https://chuckonbase.io/",
+      "description": "Official home of Chuck, the roundhouse crypto canine on Base. Track burns, join the pack, and explore alliances.",
+      "sameAs": [
+        "https://x.com/CHUCK_on_Base",
+        "https://t.me/Chuck_on_Base",
+        "https://app.uniswap.org/swap?chain=base&outputCurrency=0x7A8A5012022BCCBf3EA4b03cD2bb5583d915fb1A",
+        "https://flooz.xyz/CHUCK_on_Base"
+      ]
+    }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              chuck: {
+                primary: '#02040a',   // Updated to Near Black/Deepest Blue for "Loading Screen" look
+                secondary: '#6E98DA', // Soft Blue
+                accent: '#FFFFFF',    // White
+                burn: '#FF4500',      // Semantic Burn Color (Orange)
+                dark: '#000000',      // Pure black for cards
+              }
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              arcade: ['"Press Start 2P"', 'cursive'],
+              mono: ['CoinbaseMonoLight', 'monospace', 'ui-monospace', 'SFMono-Regular']
+            },
+            backgroundImage: {
+              'grid-pattern': "linear-gradient(to right, rgba(110, 152, 218, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(110, 152, 218, 0.1) 1px, transparent 1px)",
+              'scanlines': "linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06))",
+            },
+            boxShadow: {
+              'neon': '0 0 10px rgba(110, 152, 218, 0.3), 0 0 20px rgba(110, 152, 218, 0.1)',
+              'neon-burn': '0 0 10px rgba(255, 69, 0, 0.5), 0 0 20px rgba(255, 69, 0, 0.3)',
+              'brutal': '8px 8px 0px 0px #001a4d',
+              'brutal-white': '8px 8px 0px 0px rgba(255,255,255,0.2)',
+            },
+            animation: {
+              'marquee': 'marquee 30s linear infinite',
+              'pulse-smooth': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'blink': 'blink 1s steps(2) infinite',
+              'progress': 'progress 4s ease-in-out forwards',
+              'glitch': 'glitch 1s linear infinite',
+              'border-spin': 'border-spin 3s linear infinite',
+              // SMOOTH ANIMATIONS: Vertical movement reduced to near-zero to prevent visual glitches
+              'fade-in-up': 'fadeInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
+              'fade-in': 'fadeIn 1.2s ease-out forwards',
+              'slide-in-left': 'fadeIn 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards', // Changed to pure fade
+              'slide-in-right': 'fadeIn 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards', // Changed to pure fade
+              'scale-in': 'scaleIn 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
+              'epic-reveal': 'epicReveal 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
+            },
+            keyframes: {
+              marquee: {
+                '0%': { transform: 'translateX(0%)' },
+                '100%': { transform: 'translateX(-50%)' },
+              },
+              progress: {
+                '0%': { width: '0%' },
+                '100%': { width: '100%' },
+              },
+              blink: {
+                '0%, 100%': { opacity: '1' },
+                '50%': { opacity: '0' },
+              },
+              glitch: {
+                '2%, 64%': { transform: 'translate(2px,0) skew(0deg)' },
+                '4%, 60%': { transform: 'translate(-2px,0) skew(0deg)' },
+                '62%': { transform: 'translate(0,0) skew(5deg)' },
+              },
+              'border-spin': {
+                '100%': { transform: 'rotate(360deg)' },
+              },
+              // Refined Keyframes: Reduced travel distance from 30px to 10px to reduce "floating" effect
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(10px)' }, 
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              scaleIn: {
+                '0%': { opacity: '0', transform: 'scale(0.98)' }, // Subtle scale
+                '100%': { opacity: '1', transform: 'scale(1)' },
+              },
+              epicReveal: {
+                '0%': { opacity: '0', transform: 'scale(1.05) translateY(5px)', filter: 'blur(10px)' },
+                '100%': { opacity: '1', transform: 'scale(1) translateY(0)', filter: 'blur(0)' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      @font-face {
+        font-family: 'CoinbaseMonoLight';
+        src: url('https://emoprince.github.io/Chuck95/Coinbase_Mono-Light-web.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+      }
+      
+      html, body {
+        background-color: #02040a; 
+        color: #FFFFFF;
+        font-family: 'Inter', sans-serif;
+        overflow-x: hidden; /* Strict overflow handling */
+        width: 100%;
+        position: relative;
+        scroll-behavior: smooth; /* Enable smooth scrolling for anchors */
+      }
+
+      /* Brutalist Scrollbar */
+      ::-webkit-scrollbar {
+        width: 12px;
+        background: #000000;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #6E98DA;
+        border: 2px solid #02040a;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: white;
+      }
+
+      ::selection {
+        background: #6E98DA;
+        color: #FFFFFF;
+      }
+      
+      /* Smoother Transforms */
+      .will-change-transform {
+        will-change: transform, opacity;
+      }
+    </style>
+
+<link rel="stylesheet" href="/index.css">
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "react-dom/client": "https://aistudiocdn.com/react-dom@^19.2.0/client",
+    "react-dom": "https://aistudiocdn.com/react-dom@^19.2.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
+  }
+}
+</script>
+  <script type="module" crossorigin src="/assets/index-DJN1NLmf.js"></script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
