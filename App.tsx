@@ -89,7 +89,9 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [isDisclaimerOpen, setIsDisclaimerOpen] = useState(false);
   const [isWhitepaperOpen, setIsWhitepaperOpen] = useState(false);
-  const previousPathRef = useRef<string>(window.location.pathname === '/whitepaper' ? '/' : window.location.pathname);
+  const HOME_PATH = '/home';
+  const WHITEPAPER_PATH = '/Whitepaper';
+  const previousPathRef = useRef<string>(window.location.pathname === WHITEPAPER_PATH ? HOME_PATH : (window.location.pathname || HOME_PATH));
   const godMode = useKonamiCode();
 
   // Scroll Animations Hooks for specific sections
@@ -104,15 +106,23 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Auto-open whitepaper when arriving with ?whitepaper=1 or /whitepaper path
+  // Normalize homepage path
+  useEffect(() => {
+    if (!window.location.pathname || window.location.pathname === '/') {
+      window.history.replaceState({}, '', HOME_PATH + window.location.search + window.location.hash);
+      previousPathRef.current = HOME_PATH;
+    }
+  }, []);
+
+  // Auto-open whitepaper when arriving with ?whitepaper=1 or /Whitepaper path
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const isWhitepaperPath = window.location.pathname.toLowerCase().endsWith('/whitepaper');
+    const isWhitepaperPath = window.location.pathname === WHITEPAPER_PATH;
 
     if (params.get('whitepaper') === '1' || isWhitepaperPath) {
       setIsWhitepaperOpen(true);
       if (isWhitepaperPath) {
-        previousPathRef.current = '/';
+        previousPathRef.current = HOME_PATH;
       }
       params.delete('whitepaper');
       const newSearch = params.toString();
@@ -124,14 +134,13 @@ function App() {
 
   // Keep URL in sync when whitepaper modal opens/closes
   useEffect(() => {
-    const whitepaperPath = '/whitepaper';
     if (isWhitepaperOpen) {
-      if (window.location.pathname !== whitepaperPath) {
-        previousPathRef.current = window.location.pathname || '/';
-        window.history.pushState({}, '', whitepaperPath);
+      if (window.location.pathname !== WHITEPAPER_PATH) {
+        previousPathRef.current = window.location.pathname || HOME_PATH;
+        window.history.pushState({}, '', WHITEPAPER_PATH);
       }
-    } else if (window.location.pathname === whitepaperPath) {
-      window.history.pushState({}, '', previousPathRef.current || '/');
+    } else if (window.location.pathname === WHITEPAPER_PATH) {
+      window.history.pushState({}, '', previousPathRef.current || HOME_PATH);
     }
   }, [isWhitepaperOpen]);
 
@@ -513,10 +522,10 @@ function App() {
                              <Heart 
                                size={90} 
                                fill="#FF4500" 
-                               className="text-chuck-burn drop-shadow-[0_0_25px_rgba(255,69,0,0.6)] w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28" 
+                               className="text-chuck-burn drop-shadow-[0_0_25px_rgba(255,69,0,0.6)] w-16 h-16 sm:w-24 sm:h-24 md:w-28 md:h-28" 
                              />
                              <div className="absolute inset-0 flex items-center justify-center">
-                                <span className="font-arcade text-lg sm:text-xl md:text-2xl text-white leading-none tracking-tight">+1UP</span>
+                                <span className="font-arcade text-[10px] sm:text-sm md:text-lg text-white leading-none tracking-tight">+1UP</span>
                              </div>
                           </div>
                             <h3 className="font-arcade text-xl text-white mb-2">DONATIONS</h3>
@@ -688,7 +697,7 @@ function App() {
 
                         <div className="mt-4 flex items-center justify-center p-4 border border-chuck-secondary/20 bg-black/40">
                             <div className="text-center w-full">
-                               <div className="font-arcade text-xl sm:text-3xl text-white mb-2 leading-tight whitespace-nowrap">1,000,000,000</div>
+                               <div className="font-arcade text-lg sm:text-3xl text-white mb-2 leading-tight whitespace-nowrap">1,000,000,000</div>
                                <div className="font-mono text-chuck-secondary text-[10px] tracking-widest uppercase mb-4">MAX SUPPLY</div>
                                
                                <div className="flex justify-between text-xs font-mono text-chuck-secondary border-t border-chuck-secondary/20 pt-2">
@@ -715,7 +724,7 @@ function App() {
                         <div className="space-y-6">
                            <StatRow label="CONTRACT ADDRESS" value={CONTRACT_ADDRESS} isCopyable action={() => copyToClipboard(CONTRACT_ADDRESS)} />
                            <StatRow label="NETWORK" value="BASE (L2)" />
-                           <StatRow label="TAX (BUY/SELL)" value="0% / 0%" highlight />
+                           <StatRow label="TAX (BUY/SELL)" value="0% / 0.99%" highlight />
                            <StatRow label="TICKER" value="$CHUCK" />
                         </div>
                      </div>
@@ -741,14 +750,14 @@ function App() {
                       <div className="absolute inset-0 bg-chuck-burn/5 mix-blend-screen group-hover:bg-chuck-burn/10 transition-colors pointer-events-none"></div>
                       
                       <Flame 
-                        size={96} 
-                        className="text-chuck-burn mb-4 md:mb-6 animate-pulse drop-shadow-[0_0_20px_rgba(255,69,0,0.8)] w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32" 
+                        size={84} 
+                        className="text-chuck-burn mb-3 md:mb-5 animate-pulse drop-shadow-[0_0_20px_rgba(255,69,0,0.8)] w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28" 
                         fill="currentColor" 
                       />
                       <h2 className="font-arcade text-3xl md:text-4xl text-white text-center leading-tight">THE INCINERATOR</h2>
                       
                       {/* Burn Tracker Inserted Here */}
-                      <div className="mt-6 md:mt-8">
+                      <div className="mt-5 md:mt-7 w-full">
                         <BurnTracker className="border-chuck-burn shadow-none" />
                       </div>
                     </div>
@@ -771,7 +780,12 @@ function App() {
                          </div>
                       </div>
                       
-                      <a href="#" className="w-full bg-transparent text-white font-arcade py-4 border border-chuck-secondary hover:bg-chuck-secondary hover:text-chuck-primary transition-all flex justify-between px-6 items-center group">
+                      <a 
+                        href="https://paragraph.com/@chuckonbase"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full bg-transparent text-white font-arcade py-4 border border-chuck-secondary hover:bg-chuck-secondary hover:text-chuck-primary transition-all flex justify-between px-6 items-center group"
+                      >
                          <span>READ MANIFESTO</span>
                          <ExternalLink size={18} className="group-hover:translate-x-1 transition-transform" />
                       </a>
