@@ -767,7 +767,7 @@ function App() {
                       <h2 className="font-arcade text-xl sm:text-2xl md:text-4xl text-white text-center leading-tight">THE INCINERATOR</h2>
                       
                       {/* Burn Tracker Inserted Here */}
-                      <div className="mt-5 md:mt-7 w-full max-w-xs sm:max-w-sm mx-auto">
+                      <div className="mt-5 md:mt-7 w-full flex justify-center">
                         <BurnTracker className="border-chuck-burn shadow-none" />
                       </div>
                     </div>
