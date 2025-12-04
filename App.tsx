@@ -36,6 +36,8 @@ import Reveal from './components/Reveal';
 
 const CONTRACT_ADDRESS = "0x7A8A5012022BCCBf3EA4b03cD2bb5583d915fb1A";
 const CHARITY_WALLET = "0x222A62871904553b8F2A0bdab433E798c4691BFF";
+const HOME_PATH = '/home';
+const WHITEPAPER_PATH = '/whitepaper';
 
 // KONAMI CODE HOOK
 const useKonamiCode = () => {
@@ -89,9 +91,8 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [isDisclaimerOpen, setIsDisclaimerOpen] = useState(false);
   const [isWhitepaperOpen, setIsWhitepaperOpen] = useState(false);
-  const HOME_PATH = '/home';
-  const WHITEPAPER_PATH = '/Whitepaper';
-  const previousPathRef = useRef<string>(window.location.pathname === WHITEPAPER_PATH ? HOME_PATH : (window.location.pathname || HOME_PATH));
+  const isWhitepaperLanding = window.location.pathname.toLowerCase() === WHITEPAPER_PATH;
+  const previousPathRef = useRef<string>(isWhitepaperLanding ? HOME_PATH : (window.location.pathname || HOME_PATH));
   const godMode = useKonamiCode();
 
   // Scroll Animations Hooks for specific sections
@@ -108,16 +109,25 @@ function App() {
 
   // Normalize homepage path
   useEffect(() => {
-    if (!window.location.pathname || window.location.pathname === '/') {
+    const normalizedPath = window.location.pathname.toLowerCase();
+    const shouldRouteHome = !normalizedPath || normalizedPath === '/' || normalizedPath === '/index.html';
+
+    if (shouldRouteHome) {
+      window.history.replaceState({}, '', HOME_PATH + window.location.search + window.location.hash);
+      previousPathRef.current = HOME_PATH;
+      return;
+    }
+
+    if (normalizedPath === '/home/') {
       window.history.replaceState({}, '', HOME_PATH + window.location.search + window.location.hash);
       previousPathRef.current = HOME_PATH;
     }
   }, []);
 
-  // Auto-open whitepaper when arriving with ?whitepaper=1 or /Whitepaper path
+  // Auto-open whitepaper when arriving with ?whitepaper=1 or /whitepaper path
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const isWhitepaperPath = window.location.pathname === WHITEPAPER_PATH;
+    const isWhitepaperPath = window.location.pathname.toLowerCase() === WHITEPAPER_PATH;
 
     if (params.get('whitepaper') === '1' || isWhitepaperPath) {
       setIsWhitepaperOpen(true);
