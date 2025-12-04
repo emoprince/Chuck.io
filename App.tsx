@@ -535,7 +535,7 @@ function App() {
                               className="text-chuck-burn drop-shadow-[0_0_25px_rgba(255,69,0,0.6)] w-16 h-16 sm:w-24 sm:h-24 md:w-28 md:h-28" 
                             />
                             <div className="absolute inset-0 flex items-center justify-center">
-                               <span className="font-arcade text-[8px] sm:text-xs md:text-sm text-white leading-none tracking-tight">+1UP</span>
+                               <span className="font-arcade text-[10px] sm:text-sm md:text-sm text-white leading-none tracking-tight">+1UP</span>
                             </div>
                          </div>
                             <h3 className="font-arcade text-xl text-white mb-2">DONATIONS</h3>
