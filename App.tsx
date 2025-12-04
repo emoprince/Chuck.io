@@ -1120,12 +1120,13 @@ const MemeCard = ({ src, title }: { src: string, title: string }) => {
 const ShopItem = ({ name, price, image, desc, link }: any) => {
    const isUltraRare = name.includes('CHUCK BRIEFS') || name.includes('CHUCKINI');
    const badgeClasses = isUltraRare
-      ? 'bg-orange-500 text-white border border-white/40'
+      ? 'bg-yellow-200 text-black border border-yellow-300'
       : 'bg-chuck-secondary/20 text-chuck-secondary border border-chuck-secondary/50';
+   const imageWrapperClasses = `bg-black/40 flex-1 mb-4 p-8 relative overflow-hidden flex items-center justify-center ${isUltraRare ? 'pt-6' : ''}`;
 
    return (
       <a href={link} target="_blank" rel="noopener noreferrer" className="border border-chuck-secondary/30 bg-chuck-dark p-2 hover:border-chuck-secondary transition-all cursor-pointer group h-[300px] flex flex-col block">
-         <div className="bg-black/40 flex-1 mb-4 p-8 relative overflow-hidden flex items-center justify-center">
+         <div className={imageWrapperClasses}>
             <div className={`absolute top-2 right-2 font-mono text-[10px] px-2 py-1 rounded-sm shadow-md z-10 ${badgeClasses}`}>
                {isUltraRare ? 'ULTRA RARE' : 'RARE'}
             </div>
