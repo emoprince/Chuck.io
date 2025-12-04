@@ -37,7 +37,7 @@ import Reveal from './components/Reveal';
 const CONTRACT_ADDRESS = "0x7A8A5012022BCCBf3EA4b03cD2bb5583d915fb1A";
 const CHARITY_WALLET = "0x222A62871904553b8F2A0bdab433E798c4691BFF";
 const HOME_PATH = '/home';
-const WHITEPAPER_PATH = '/whitepaper';
+const WHITEPAPER_PATH = '/Whitepaper';
 
 // KONAMI CODE HOOK
 const useKonamiCode = () => {
@@ -91,7 +91,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [isDisclaimerOpen, setIsDisclaimerOpen] = useState(false);
   const [isWhitepaperOpen, setIsWhitepaperOpen] = useState(false);
-  const isWhitepaperLanding = window.location.pathname.toLowerCase() === WHITEPAPER_PATH;
+  const isWhitepaperLanding = window.location.pathname.toLowerCase() === WHITEPAPER_PATH.toLowerCase();
   const previousPathRef = useRef<string>(isWhitepaperLanding ? HOME_PATH : (window.location.pathname || HOME_PATH));
   const godMode = useKonamiCode();
 
@@ -127,7 +127,7 @@ function App() {
   // Auto-open whitepaper when arriving with ?whitepaper=1 or /whitepaper path
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const isWhitepaperPath = window.location.pathname.toLowerCase() === WHITEPAPER_PATH;
+    const isWhitepaperPath = window.location.pathname.toLowerCase() === WHITEPAPER_PATH.toLowerCase();
 
     if (params.get('whitepaper') === '1' || isWhitepaperPath) {
       setIsWhitepaperOpen(true);
@@ -535,7 +535,7 @@ function App() {
                               className="text-chuck-burn drop-shadow-[0_0_25px_rgba(255,69,0,0.6)] w-16 h-16 sm:w-24 sm:h-24 md:w-28 md:h-28" 
                             />
                             <div className="absolute inset-0 flex items-center justify-center">
-                               <span className="font-arcade text-[10px] sm:text-sm md:text-sm text-white leading-none tracking-tight">+1UP</span>
+                               <span className="font-arcade text-[8px] sm:text-[10px] md:text-sm text-white leading-none tracking-tight">+1UP</span>
                             </div>
                          </div>
                             <h3 className="font-arcade text-xl text-white mb-2">DONATIONS</h3>
@@ -707,7 +707,7 @@ function App() {
 
                         <div className="mt-4 flex items-center justify-center p-4 border border-chuck-secondary/20 bg-black/40">
                             <div className="text-center w-full">
-                               <div className="font-arcade text-2xl sm:text-3xl md:text-4xl text-white mb-2 leading-none whitespace-nowrap">1,000,000,000</div>
+                               <div className="font-arcade text-xl sm:text-3xl md:text-4xl text-white mb-2 leading-none whitespace-nowrap">1,000,000,000</div>
                                <div className="font-mono text-chuck-secondary text-[10px] tracking-widest uppercase mb-4">MAX SUPPLY</div>
                                
                                <div className="flex justify-between text-xs font-mono text-chuck-secondary border-t border-chuck-secondary/20 pt-2">
@@ -764,7 +764,7 @@ function App() {
                         className="text-chuck-burn mb-3 md:mb-5 animate-pulse drop-shadow-[0_0_20px_rgba(255,69,0,0.8)] w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28" 
                         fill="currentColor" 
                       />
-                      <h2 className="font-arcade text-2xl sm:text-3xl md:text-4xl text-white text-center leading-tight">THE INCINERATOR</h2>
+                      <h2 className="font-arcade text-xl sm:text-2xl md:text-4xl text-white text-center leading-tight">THE INCINERATOR</h2>
                       
                       {/* Burn Tracker Inserted Here */}
                       <div className="mt-5 md:mt-7 w-full">
@@ -823,7 +823,7 @@ function App() {
                        
                        {/* CATEGORY: ALLIANCES */}
                        <div className="mb-8">
-                         <div className="text-chuck-secondary mb-5 md:mb-6 border-b border-chuck-secondary/30 pb-2">ALLIANCES & COMMUNITY</div>
+                         <div className="text-chuck-secondary mb-6 md:mb-7 border-b border-chuck-secondary/30 pb-2 text-[11px] md:text-xs tracking-wide">ALLIANCES & COMMUNITY</div>
                          <div className="space-y-3 font-mono">
                              <HighScoreRow rank="1ST" name="METACADE" score="9,999,999" stage="L2 ARCADE" isFirst link="https://www.metacade.co/" />
                              <HighScoreRow rank="2ND" name="PIGMO" score="8,850,200" stage="CASINO" link="https://pigmo.com" />
@@ -834,7 +834,7 @@ function App() {
 
                        {/* CATEGORY: MARKETS */}
                        <div className="mb-8">
-                         <div className="text-chuck-secondary mb-5 md:mb-6 border-b border-chuck-secondary/30 pb-2">MARKETS & FIAT</div>
+                         <div className="text-chuck-secondary mb-6 md:mb-7 border-b border-chuck-secondary/30 pb-2 text-[11px] md:text-xs tracking-wide">MARKETS & FIAT</div>
                          <div className="space-y-3 font-mono">
                              <HighScoreRow rank="5TH" name="UNISWAP" score="5,900,000" stage="DEX" link="https://app.uniswap.org/swap?chain=base&outputCurrency=0x7A8A5012022BCCBf3EA4b03cD2bb5583d915fb1A" />
                              <HighScoreRow rank="6TH" name="ASCENDEX" score="5,200,000" stage="CEX" link="https://ascendex.com/en/cashtrade-spottrading/usdt/chuck" />
@@ -844,7 +844,7 @@ function App() {
 
                        {/* CATEGORY: DATA */}
                        <div className="mb-8">
-                         <div className="text-chuck-secondary mb-5 md:mb-6 border-b border-chuck-secondary/30 pb-2">DATA & TRACKING</div>
+                         <div className="text-chuck-secondary mb-6 md:mb-7 border-b border-chuck-secondary/30 pb-2 text-[11px] md:text-xs tracking-wide">DATA & TRACKING</div>
                          <div className="space-y-3 font-mono">
                              <HighScoreRow rank="8TH" name="COINGECKO" score="6,500,000" stage="DATA" link="https://www.coingecko.com/" />
                              <HighScoreRow rank="9TH" name="COINMARKETCAP" score="6,450,000" stage="DATA" link="https://coinmarketcap.com/" />
@@ -853,7 +853,7 @@ function App() {
 
                        {/* CATEGORY: TOOLS */}
                        <div className="mb-8">
-                         <div className="text-chuck-secondary mb-5 md:mb-6 border-b border-chuck-secondary/30 pb-2">TOOLS & WALLETS</div>
+                         <div className="text-chuck-secondary mb-6 md:mb-7 border-b border-chuck-secondary/30 pb-2 text-[11px] md:text-xs tracking-wide">TOOLS & WALLETS</div>
                          <div className="space-y-3 font-mono">
                              <HighScoreRow rank="10TH" name="ETHOS" score="4,100,000" stage="WALLET" link="https://www.ethos.io/" />
                              <HighScoreRow rank="11TH" name="BICONOMY" score="3,500,000" stage="INFRA" link="https://www.biconomy.io/" />
