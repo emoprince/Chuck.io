@@ -1120,7 +1120,9 @@ const MemeCard = ({ src, title }: { src: string, title: string }) => {
 const ShopItem = ({ name, price, image, desc, link }: any) => (
    <a href={link} target="_blank" rel="noopener noreferrer" className="border border-chuck-secondary/30 bg-chuck-dark p-2 hover:border-chuck-secondary transition-all cursor-pointer group h-[300px] flex flex-col block">
       <div className="bg-black/40 flex-1 mb-4 p-8 relative overflow-hidden flex items-center justify-center">
-         <div className="absolute top-2 right-2 bg-chuck-secondary/20 text-chuck-secondary border border-chuck-secondary/50 font-mono text-[10px] px-2 py-1">RARE</div>
+         <div className={`absolute top-2 right-2 ${name.includes('CHUCK BRIEFS') || name.includes('CHUCKINI') ? 'bg-chuck-secondary/30 text-white border border-white/40' : 'bg-chuck-secondary/20 text-chuck-secondary border border-chuck-secondary/50'} font-mono text-[10px] px-2 py-1`}>
+            {name.includes('CHUCK BRIEFS') || name.includes('CHUCKINI') ? 'ULTRA RARE' : 'RARE'}
+         </div>
          <img src={image} alt={name} className="w-32 h-32 object-contain group-hover:scale-110 transition-transform drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]" />
       </div>
       <div className="px-2 pb-2">
