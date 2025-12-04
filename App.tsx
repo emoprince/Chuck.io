@@ -1126,7 +1126,7 @@ const ShopItem = ({ name, price, image, desc, link }: any) => {
    return (
       <a href={link} target="_blank" rel="noopener noreferrer" className="border border-chuck-secondary/30 bg-chuck-dark p-2 hover:border-chuck-secondary transition-all cursor-pointer group h-[300px] flex flex-col block">
          <div className="bg-black/40 flex-1 mb-4 p-8 relative overflow-hidden flex items-center justify-center">
-            <div className={`absolute top-2 right-2 font-mono text-[10px] px-2 py-1 ${badgeClasses}`}>
+            <div className={`absolute top-2 right-2 font-mono text-[10px] px-2 py-1 rounded-sm shadow-md z-10 ${badgeClasses}`}>
                {isUltraRare ? 'ULTRA RARE' : 'RARE'}
             </div>
             <img src={image} alt={name} className="w-32 h-32 object-contain group-hover:scale-110 transition-transform drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]" />
@@ -1134,10 +1134,10 @@ const ShopItem = ({ name, price, image, desc, link }: any) => {
          <div className="px-2 pb-2">
             <div className="font-arcade text-sm text-white truncate">{name}</div>
             <div className="font-mono text-[10px] text-chuck-secondary mb-2">{desc}</div>
-            <div className="flex justify-between items-center border-t border-chuck-secondary/10 pt-2">
-               <span className="font-bold text-white font-mono">{price}</span>
-               <div className="w-2 h-2 bg-green-500 rounded-full shadow-[0_0_6px_#22c55e] animate-pulse"></div>
-            </div>
+         <div className="flex justify-between items-center border-t border-chuck-secondary/10 pt-2">
+            <span className="font-bold text-white font-mono">{price}</span>
+            <div className={`w-2 h-2 ${isUltraRare ? 'bg-orange-500 shadow-[0_0_6px_#f97316]' : 'bg-green-500 shadow-[0_0_6px_#22c55e]'} rounded-full animate-pulse`}></div>
+         </div>
          </div>
       </a>
    );
