@@ -791,7 +791,7 @@ function App() {
                       </div>
                       
                       <a 
-                        href="https://paragraph.com/@chuckonbase"
+                  href="https://paragraph.xyz/@chuckonbase"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-full bg-transparent text-white font-arcade py-4 border border-chuck-secondary hover:bg-chuck-secondary hover:text-chuck-primary transition-all flex justify-between px-6 items-center group"

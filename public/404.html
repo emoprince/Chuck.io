@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="noindex,follow" />
+    <script>
+      (function () {
+        var path = (window.location.pathname || '').toLowerCase();
+        var search = window.location.search || '';
+        var hash = window.location.hash || '';
+
+        if (path.includes('/whitepaper')) {
+          window.location.replace('/home?whitepaper=1' + hash);
+          return;
+        }
+
+        window.location.replace('/home' + search + hash);
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>
