@@ -1122,17 +1122,17 @@ const ShopItem = ({ name, price, image, desc, link }: any) => {
    const badgeClasses = isUltraRare
       ? 'bg-yellow-200 text-black border border-yellow-300'
       : 'bg-chuck-secondary/20 text-chuck-secondary border border-chuck-secondary/50';
-   const imageWrapperClasses = `bg-black/40 flex-1 mb-4 p-8 relative overflow-hidden flex items-center justify-center ${
-      isUltraRare ? 'pt-14 pr-14 min-h-[220px]' : 'min-h-[200px]'
+   const imageWrapperClasses = `bg-black/40 flex-1 mb-4 px-6 md:px-8 py-10 relative overflow-hidden flex items-center justify-center ${
+      isUltraRare ? 'pt-14 pr-14 min-h-[240px]' : 'min-h-[220px]'
    }`;
 
    return (
-      <a href={link} target="_blank" rel="noopener noreferrer" className="border border-chuck-secondary/30 bg-chuck-dark p-2 hover:border-chuck-secondary transition-all cursor-pointer group h-[300px] flex flex-col block">
+      <a href={link} target="_blank" rel="noopener noreferrer" className="border border-chuck-secondary/30 bg-chuck-dark p-2 hover:border-chuck-secondary transition-all cursor-pointer group min-h-[340px] flex flex-col block">
          <div className={imageWrapperClasses}>
             <div className={`absolute top-2 right-2 font-mono text-[10px] px-2 py-1 rounded-sm shadow-md z-10 ${badgeClasses}`}>
                {isUltraRare ? 'ULTRA RARE' : 'RARE'}
             </div>
-            <img src={image} alt={name} className="w-32 h-32 object-contain group-hover:scale-110 transition-transform drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]" />
+            <img src={image} alt={name} className="w-36 h-36 md:w-40 md:h-40 object-contain group-hover:scale-110 transition-transform drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]" />
          </div>
          <div className="px-2 pb-2">
             <div className="font-arcade text-sm text-white truncate">{name}</div>
