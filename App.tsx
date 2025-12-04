@@ -1083,20 +1083,39 @@ const StatRow = ({ label, value, highlight, isCopyable, action }: any) => (
    </div>
 );
 
-const MemeCard = ({ src, title }: { src: string, title: string }) => (
-   <div className="aspect-square bg-chuck-dark border border-chuck-secondary/30 relative group overflow-hidden shadow-none hover:shadow-neon hover:border-chuck-secondary transition-all h-full">
-      {/* Updated Meme Visual: Blur -> Focus */}
-      <img src={src} alt={title} className="w-full h-full object-cover blur-[2px] opacity-80 group-hover:blur-0 group-hover:opacity-100 transition-all duration-300" />
-      <div className="absolute inset-0 bg-gradient-to-t from-chuck-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
-         <div className="flex justify-between items-end">
-            <div className="font-arcade text-white text-sm drop-shadow-md">{title}</div>
-            <a href={src} target="_blank" rel="noopener noreferrer" className="p-2 bg-chuck-secondary text-chuck-primary hover:bg-white transition-colors" title="Download">
-               <Download size={16} />
-            </a>
+const MemeCard = ({ src, title }: { src: string, title: string }) => {
+   const handleDownload = async () => {
+      try {
+         const response = await fetch(src);
+         const blob = await response.blob();
+         const url = URL.createObjectURL(blob);
+         const link = document.createElement('a');
+         link.href = url;
+         link.download = `${title?.replace(/\s+/g, '-').toLowerCase() || 'chuck-meme'}.jpg`;
+         document.body.appendChild(link);
+         link.click();
+         link.remove();
+         URL.revokeObjectURL(url);
+      } catch (err) {
+         console.error('Failed to download image', err);
+      }
+   };
+
+   return (
+      <div className="aspect-square bg-chuck-dark border border-chuck-secondary/30 relative group overflow-hidden shadow-none hover:shadow-neon hover:border-chuck-secondary transition-all h-full">
+         {/* Updated Meme Visual: Blur -> Focus */}
+         <img src={src} alt={title} className="w-full h-full object-cover blur-[2px] opacity-80 group-hover:blur-0 group-hover:opacity-100 transition-all duration-300" />
+         <div className="absolute inset-0 bg-gradient-to-t from-chuck-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+            <div className="flex justify-between items-end">
+               <div className="font-arcade text-white text-sm drop-shadow-md">{title}</div>
+               <button onClick={handleDownload} className="p-2 bg-chuck-secondary text-chuck-primary hover:bg-white transition-colors" title="Download">
+                  <Download size={16} />
+               </button>
+            </div>
          </div>
       </div>
-   </div>
-);
+   );
+};
 
 const ShopItem = ({ name, price, image, desc, link }: any) => (
    <a href={link} target="_blank" rel="noopener noreferrer" className="border border-chuck-secondary/30 bg-chuck-dark p-2 hover:border-chuck-secondary transition-all cursor-pointer group h-[300px] flex flex-col block">
