@@ -1122,7 +1122,9 @@ const ShopItem = ({ name, price, image, desc, link }: any) => {
    const badgeClasses = isUltraRare
       ? 'bg-yellow-200 text-black border border-yellow-300'
       : 'bg-chuck-secondary/20 text-chuck-secondary border border-chuck-secondary/50';
-   const imageWrapperClasses = `bg-black/40 flex-1 mb-4 p-8 relative overflow-hidden flex items-center justify-center ${isUltraRare ? 'pt-6' : ''}`;
+   const imageWrapperClasses = `bg-black/40 flex-1 mb-4 p-8 relative overflow-hidden flex items-center justify-center ${
+      isUltraRare ? 'pt-14 pr-14 min-h-[220px]' : 'min-h-[200px]'
+   }`;
 
    return (
       <a href={link} target="_blank" rel="noopener noreferrer" className="border border-chuck-secondary/30 bg-chuck-dark p-2 hover:border-chuck-secondary transition-all cursor-pointer group h-[300px] flex flex-col block">
